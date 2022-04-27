@@ -29,6 +29,6 @@ public class MatrizExercicio7 {
                 mtz[l][c] = new Random().nextInt(100);
             }
         }
-        return (1);
+        return (0);
     }
 }
