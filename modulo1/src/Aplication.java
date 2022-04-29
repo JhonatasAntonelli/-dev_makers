@@ -8,6 +8,8 @@ public class Aplication {
 
     variavel.gravarNome("Jhonatas");
 
+        System.out.println(FasesDaLua.CHEIA.getDescricao);
+
 
     }
 }

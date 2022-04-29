@@ -1,6 +1,7 @@
+
 public enum FasesDaLua {
 
-    CHEIA(descricao: "A lua está cheia", numero 1),
+    CHEIA (descricao: "A lua está cheia", numero 1),
     MINGUANTE(descricao: "A lua está minguante", numero 2),
     CRESCENTE(descricao: "A lua está crescente", numero 3),
     NOVA(descricao: "A lua está nova", numero 4);
@@ -9,11 +10,12 @@ public enum FasesDaLua {
         this.descricao = descricao;
         this.numero = numero;
     }
-    private static String descricao;
+    private String descricao;
 
     private int numero;
 
     private String getDescricao(){
+
         return descricao;
     }
 
@@ -21,7 +23,9 @@ public enum FasesDaLua {
         return numero;
     }
 
-    public static FasesDaLua
+    public FasesDaLua qualLua(){
+       return FasesDaLua.CHEIA;
+    }
 
 
 
