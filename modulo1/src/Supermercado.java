@@ -23,6 +23,21 @@ public class Supermercado {
                 case 3:
                     listar(sc);
                     break;
+                case 4:
+                    //Pesquisar um produto pelo codigo
+                    break;
+                case 5:
+                    //Pesquisar um produto pelo nome usando like
+                    break;
+                case 6:
+                    //vendas
+                    break;
+                case 7:
+                    //Relatório analítico
+                    break;
+                case 8:
+                    //Relatório sintético
+                    break;
                 case 0:
                     break;
                 default:
@@ -39,13 +54,18 @@ public class Supermercado {
             System.out.println("1 - Cadastrar/Comprar produto: ");
             System.out.println("2 - Imprimir Estoque ");
             System.out.println("3 - Listar os produtos pelo tipo ");
+            System.out.println("4 - Pesquisar um produto pelo código ");
+            System.out.println("5 - Pesquisar um produto pelo nome usando like ");
+            System.out.println("6 - Vendas ");
+            System.out.println("7 - Relatório de vendas analitico, todas as vendas ");
+            System.out.println("8 - Relatório de vendas sintetico, consolidado por CPF ");
             System.out.println("0 - Sair");
             System.out.println("----------------------------------------");
 
             int validacao = sc.nextInt();
             String aux = sc.nextLine();
 
-            if (validacao == 1 || validacao == 2 || validacao == 3 || validacao == 0) {
+            if (validacao >= 0 && validacao <= 8) {
                 return validacao;
             } else {
                 System.out.println("Digite as opções corretamente");
@@ -274,6 +294,8 @@ public class Supermercado {
         }
 
     }
+
+
 }
 
 
