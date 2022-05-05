@@ -32,6 +32,7 @@ public class Supermercado {
     }
 
     public static int menu(Scanner sc){
+
         do {
             System.out.println("----------------------------------------");
             System.out.println("1 - Cadastrar/Comprar produto: ");
@@ -55,12 +56,12 @@ public class Supermercado {
 
         for (int i = 0; i < productInfo.length; i++) {
 
-            if (productInfo[i] == null){
+            if (productInfo[i][0] == null){
                 break;
             }else{
-                Object [][] newMatriz = new Object[productInfo.length*2][colunas];
+                Object [][] newMatriz = new Object[linhas * 2][colunas];
                 for (int k = 0; k < productInfo.length; k++) {
-                    for (int j = 0; j < linhas; j++) {
+                    for (int j = 0; j < colunas; j++) {
                         newMatriz[k][j] = productInfo [k][j];
                     }
                 }
@@ -102,8 +103,8 @@ public class Supermercado {
             System.out.println("Quantidade:");
             try {
                 int add = sc.nextInt();
-                int sum = add + (int)productInfo[i][5];
-                productInfo[i][5] = sum;
+                int addAux = (int) productInfo[i][5];
+                productInfo[i][5] = add + addAux;
 
             } catch (NumberFormatException ignored) {
 
@@ -112,9 +113,20 @@ public class Supermercado {
 
         do{
             System.out.println("Nome: ");
-            productInfo[i][3] = sc.nextLine();
+            productInfo[i][3] = sc.next();
 
         }while(productInfo[i][3] == null);
+
+        Tipo tipoProduto = (Tipo) productInfo[i][1];
+
+        double precoCusto = (double) productInfo[i][4];
+
+        productInfo[i][6] = Tipo.calcularVenda(tipoProduto, precoCusto);
+
+        productInfo[i][7] = LocalDateTime.now();
+
+        productInfo[i][8] = productInfo[i][5];
+
     }
 
     public static void cadastrar(Scanner sc, String identifier, int i) {
@@ -168,6 +180,7 @@ public class Supermercado {
             System.out.println("Quantidade:");
             try{
                 productInfo[i][5] = sc.nextInt();
+
             }catch (NumberFormatException ignored){
             }
 
@@ -184,14 +197,12 @@ public class Supermercado {
 
         productInfo[i][8] = productInfo[i][5];
 
-        return;
-
     }
     public static void imprimir(){
 
         for (int i = 0; i < productInfo.length; i++) {
 
-            if (productInfo[i] == null){
+            if (productInfo[i] [0] == null){
                 break;
 
             }else {
@@ -206,7 +217,7 @@ public class Supermercado {
                 System.out.println("Custo: " + productInfo[i][4]);
                 System.out.println("Quantidade: " + productInfo[i][5]);
                 System.out.println("Preço de venda: " + productInfo[i][6]);
-                System.out.printf("Data de compra: %s \n", dataFormatada);
+                System.out.println("Data de compra: " + dataFormatada);
                 System.out.println("Estoque: " + productInfo[i][8]);
             }
 
