@@ -1,9 +1,10 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Supermercado {
-    private static int linhas = 2;
+    private static int linhas = 1;
     private static int colunas = 9;
     private static Object[][] productInfo = new Object[linhas][colunas];
 
@@ -54,24 +55,19 @@ public class Supermercado {
 
     public static void verificaMatriz(){
 
-        for (int i = 0; i < productInfo.length; i++) {
-
-            if (productInfo[i][0] == null){
-                break;
-            }else{
-                Object [][] newMatriz = new Object[linhas * 2][colunas];
-                for (int k = 0; k < productInfo.length; k++) {
-                    for (int j = 0; j < colunas; j++) {
-                        newMatriz[k][j] = productInfo [k][j];
-                    }
-                }
-                productInfo = newMatriz;
-                break;
+        Object [][] newMatriz = new Object[productInfo.length + 1][colunas];
+        for (int k = 0; k < productInfo.length; k++) {
+            for (int j = 0; j < colunas; j++) {
+                newMatriz[k][j] = productInfo [k][j];
             }
         }
+        productInfo = newMatriz;
+
     }
 
+
     public static void cadastrarComprar(Scanner sc){
+
         System.out.println("Digite o identificador: ");
         String identifier = sc.nextLine();
         for (int i = 0; i < productInfo.length; i++) {
@@ -88,32 +84,36 @@ public class Supermercado {
 
     public static void comprar(Scanner sc, int i){
 
-        verificaMatriz();
-
         do {
             System.out.println("Custo: ");
             try {
                 productInfo[i][4] = sc.nextDouble();
-            } catch (NumberFormatException ignored) {
-
+            } catch (InputMismatchException ignored) {
+                productInfo[i][4] = 0.0;
             }
+            sc.nextLine();
+
         } while (((Double) productInfo[i][4]) <= 0);
 
         do {
             System.out.println("Quantidade:");
             try {
                 int add = sc.nextInt();
+
                 int addAux = (int) productInfo[i][5];
                 productInfo[i][5] = add + addAux;
 
-            } catch (NumberFormatException ignored) {
-
+            } catch (InputMismatchException ignored) {
+                productInfo[i][5] = 0;
             }
+
+            sc.nextLine();
+
         } while (((int) productInfo[i][5]) <= 0);
 
         do{
             System.out.println("Nome: ");
-            productInfo[i][3] = sc.next();
+            productInfo[i][3] = sc.nextLine();
 
         }while(productInfo[i][3] == null);
 
@@ -137,8 +137,11 @@ public class Supermercado {
 
         do {
             System.out.println("Tipo do produto: 1 - Alimento, 2 - Higiene, 3 Bebida.");
-            int tipo = sc.nextInt();
+
             try {
+
+                int tipo = sc.nextInt();
+
                 if (tipo == 1) {
                     productInfo[i][1] = Tipo.ALIMENTO;
                 }
@@ -148,15 +151,16 @@ public class Supermercado {
                 else if (tipo == 3) {
                     productInfo[i][1] = Tipo.BEBIDA;
                 }
-            }catch (NumberFormatException ignored){
+            }catch (InputMismatchException ignored){
 
             }
+            sc.nextLine();
+
         } while(( productInfo[i][1]) == null);
 
         do{
             System.out.println("Marca:");
 
-            String auxb = sc.nextLine();
             productInfo[i][2] = sc.nextLine();
 
         }while(productInfo[i][2] == null);
@@ -171,9 +175,11 @@ public class Supermercado {
             System.out.println("Custo: ");
             try {
                 productInfo[i][4] = sc.nextDouble();
-            } catch (NumberFormatException ignored) {
-
+            } catch (InputMismatchException ignored) {
+                productInfo[i][4] = 0.0;
             }
+            sc.nextLine();
+
         }while(((Double) productInfo[i][4]) <= 0);
 
         do{
@@ -181,8 +187,10 @@ public class Supermercado {
             try{
                 productInfo[i][5] = sc.nextInt();
 
-            }catch (NumberFormatException ignored){
+            }catch (InputMismatchException ignored){
+                productInfo[i][5] = 0;
             }
+            sc.nextLine();
 
         } while(((int) productInfo[i][5]) <= 0);
 
