@@ -18,16 +18,18 @@ public class Supermercado {
                     cadastrarComprar(sc);
                     break;
                 case 2:
-                    imprimir();
+                    for (int i = 0; i < productInfo.length; i++){
+                    imprimir(i);
+                    }
                     break;
                 case 3:
                     listar(sc);
                     break;
                 case 4:
-                    //Pesquisar um produto pelo codigo
+                    pesquisarCodigo(sc);
                     break;
                 case 5:
-                    //Pesquisar um produto pelo nome usando like
+                    pesquisarNome(sc);
                     break;
                 case 6:
                     //vendas
@@ -226,12 +228,12 @@ public class Supermercado {
         productInfo[i][8] = productInfo[i][5];
 
     }
-    public static void imprimir(){
+    public static void imprimir(int i){
 
-        for (int i = 0; i < productInfo.length; i++) {
+        //for (int i = 0; i < productInfo.length; i++) {
 
             if (productInfo[i] [0] == null){
-                break;
+                return;
 
             }else {
 
@@ -247,14 +249,16 @@ public class Supermercado {
                 System.out.println("Preço de venda: " + productInfo[i][6]);
                 System.out.println("Data de compra: " + dataFormatada);
                 System.out.println("Estoque: " + productInfo[i][8]);
+
             }
 
         }
 
-    }
+    //}
     public static void listar(Scanner sc) {
 
         Tipo valida = null;
+
         do {
             System.out.println("Qual o tipo do produto (1 - Alimento, 2 - Higiene, 3 Bebida)? ");
 
@@ -277,25 +281,90 @@ public class Supermercado {
 
         for (int i = 0; i < productInfo.length; i++) {
             if (productInfo[i][1] == valida){
-                LocalDateTime dataHoraEntrada = (LocalDateTime) productInfo[i][7];
-                String dataFormatada = dataHoraEntrada.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
 
-                System.out.println("Identificador: " + productInfo[i][0]);
-                System.out.println("Tipo: " + productInfo[i][1]);
-                System.out.println("Marca: " + productInfo[i][2]);
-                System.out.println("Nome: " + productInfo[i][3]);
-                System.out.println("Custo: " + productInfo[i][4]);
-                System.out.println("Quantidade: " + productInfo[i][5]);
-                System.out.println("Preço de venda: " + productInfo[i][6]);
-                System.out.printf("Data de compra: %s \n", dataFormatada);
-                System.out.println("Estoque: " + productInfo[i][8]);
+                imprimir(i);
+                //LocalDateTime dataHoraEntrada = (LocalDateTime) productInfo[i][7];
+                //String dataFormatada = dataHoraEntrada.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+
+                //System.out.println("Identificador: " + productInfo[i][0]);
+               //System.out.println("Tipo: " + productInfo[i][1]);
+                //System.out.println("Marca: " + productInfo[i][2]);
+                //System.out.println("Nome: " + productInfo[i][3]);
+                //System.out.println("Custo: " + productInfo[i][4]);
+                //System.out.println("Quantidade: " + productInfo[i][5]);
+               //System.out.println("Preço de venda: " + productInfo[i][6]);
+                //System.out.printf("Data de compra: %s \n", dataFormatada);
+                //System.out.println("Estoque: " + productInfo[i][8]);
             }
 
         }
 
     }
+    public static void pesquisarCodigo (Scanner sc) {
+
+        do {
+            System.out.println("Digite o código do produto pesquisado: ");
+
+            try{
+                String codigo = sc.nextLine();
 
 
-}
+                for (int i = 0; i < productInfo.length; i++) {
+                    //for (int j = 0; j < productInfo.length; j++) {
+                        if (productInfo[i][0].equals(codigo)) {
+                                imprimir(i);
+                            //LocalDateTime dataHoraEntrada = (LocalDateTime) productInfo[i][7];
+                            //String dataFormatada = dataHoraEntrada.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+
+                            //System.out.println("Tipo: " + productInfo[i][1]);
+                            //System.out.println("Marca: " + productInfo[i][2]);
+                            //System.out.println("Nome: " + productInfo[i][3]);
+                            //System.out.println("Custo: " + productInfo[i][4]);
+                            //System.out.println("Quantidade: " + productInfo[i][5]);
+                            //System.out.println("Preço de venda: " + productInfo[i][6]);
+                            //System.out.printf("Data de compra: %s \n", dataFormatada);
+                            //System.out.println("Estoque: " + productInfo[i][8]);
+
+                            return;
+                        }
+
+                    }
+
+                //}
+            } catch (NullPointerException ignored) {
+                System.out.println("O código digitado não foi encontrado");
+            }
+
+
+        }while (true);
+
+    }
+    public static void pesquisarNome(Scanner sc){
+        do {
+            System.out.println("Digite o nome do produto pesquisado: ");
+
+            try{
+                String codigo = sc.nextLine();
+
+                for (int i = 0; i < productInfo.length; i++) {
+
+                    if (productInfo[i][3].equals(codigo)) {
+                        imprimir(i);
+                        return;
+                    }
+                }
+            } catch (NullPointerException ignored) {
+                System.out.println("O código digitado não foi encontrado");
+            }
+
+
+        }while (true);
+
+    }
+    }
+
+//}
+
+
 
 
