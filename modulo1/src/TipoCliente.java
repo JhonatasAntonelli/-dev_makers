@@ -1,7 +1,7 @@
 public enum TipoCliente {
-    PF (0),
-    PJ (0.05),
-    VIP (0.15);
+    PF (1),
+    PJ (0.95),
+    VIP (0.85);
 
     private final double desconto;
 
@@ -16,5 +16,7 @@ public enum TipoCliente {
         return (tipoCliente.getDesconto() * valorTotal);
     }
 }
+
+
 
 
